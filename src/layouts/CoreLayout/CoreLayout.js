@@ -14,18 +14,27 @@ export class CoreLayout extends React.Component {
     this.state = { timestamp: null }
   }
 
+  login = () =>{
+    FbApi.login();
+  }
+
   componentDidMount(){
     FbApi.setUpdateFn(() =>{
       this.setState({ timestamp: +new Date })
-    })
+    });
+    FbApi.updateLoginStatus();
   }
 
   renderNotLoggedIn(){
-    return(<div>Here we will put our button</div>) ;
+    return(<div>
+            <button className="btn btn-primary" onClick={this.login}>
+              Login with Facebook
+            </button>
+          </div>) ;
   }
 
   renderLoggedIn(){
-      const { children } = this.props;
+      const { children } = this.props; //children = this.props.children;
       return (
         <div className='container text-center'>
           <Header />

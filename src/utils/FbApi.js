@@ -16,12 +16,17 @@ class FbApi{
     return !!this.authResponse;
   }
   updateLoginStatus(){
-    FB.getLoginStatus((response) =>{
-      if (response.status === 'connected'){
-        this.authResponse = response.authResponse;
-        this.update;
-      }
-    })
+    FB.getLoginStatus(this.processResponse)
+  }
+
+  login(){
+    FB.login(this.processResponse)
+  }
+  processResponse = (response) => {
+    if (response.status === 'connected'){
+      this.authResponse = response.authResponse;
+      this.update();
+    }
   }
 }
 
