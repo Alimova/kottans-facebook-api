@@ -8,11 +8,15 @@ class FbApi{
   photos = [];
   update = () => {};
 
+  setUpdateFn(fn){
+    this.update = fn;
+  }
+
   isLoggedIn(){
     return !!this.authResponse;
   }
   updateLoginStatus(){
-    Fb.getLoginStatus((response) =>{
+    FB.getLoginStatus((response) =>{
       if (response.status === 'connected'){
         this.authResponse = response.authResponse;
         this.update;
