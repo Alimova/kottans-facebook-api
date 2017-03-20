@@ -26,7 +26,23 @@ class FbApi{
     if (response.status === 'connected'){
       this.authResponse = response.authResponse;
       this.update();
+      this.updateMe();
+      this.getPhotos();
     }
+  }
+
+  updateMe(){
+    FB.api('/me', (response) =>{
+      this.me = response;
+      this.update();
+    })
+  }
+
+  getPhotos(){
+    FB.api('/me', (response) =>{
+      this.photos = response;
+      this.update();
+    })
   }
 }
 

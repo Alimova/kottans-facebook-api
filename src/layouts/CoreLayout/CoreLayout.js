@@ -19,6 +19,7 @@ export class CoreLayout extends React.Component {
   }
 
   componentDidMount(){
+    //FbApi.setUpdateFn(this.triggerUpdate);
     FbApi.setUpdateFn(() =>{
       this.setState({ timestamp: +new Date })
     });
@@ -34,12 +35,13 @@ export class CoreLayout extends React.Component {
   }
 
   renderLoggedIn(){
-      const { children } = this.props; //children = this.props.children;
+      const { children }  = this.props; //children = this.props.children;
+      const { timestamp } = this.state;
       return (
         <div className='container text-center'>
           <Header />
           <div className='core-layout__viewport'>
-            {children}
+            {React.cloneElement(children, { timestamp } )}
           </div>
         </div>
       )
